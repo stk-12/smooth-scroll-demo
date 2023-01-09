@@ -5,6 +5,9 @@ class Main {
   constructor() {
     this.element = document.querySelector('.scroll');
 
+    this.anchors = document.querySelectorAll('.anchor');
+    this.sections = document.querySelectorAll('.section');
+
     this.viewport = {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -20,6 +23,7 @@ class Main {
     
     this.smoothScroll = new SmoothScroll({
       element: this.element, 
+      sections: this.sections,
       viewport: this.viewport, 
       scroll: this.scroll
     });    
@@ -38,6 +42,14 @@ class Main {
   addEventListeners() {
     window.addEventListener('resize', this.onResize.bind(this));
     // window.addEventListener('scroll', this.onScroll.bind(this));
+
+    this.anchors.forEach((anchor) => {
+      anchor.addEventListener('click', (e)=>{
+        e.preventDefault();
+        let num = Number(e.currentTarget.dataset.anchor);
+        this.smoothScroll.scrollSection(num);
+      });
+    });
   }
   
   // onScroll() {

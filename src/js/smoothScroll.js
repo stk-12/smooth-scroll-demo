@@ -1,14 +1,17 @@
 import gsap from 'gsap';
 
 export default class {
-  constructor({ element, viewport, scroll }) {
+  constructor({ element, sections, viewport, scroll }) {
     this.element = element;
+    this.sections = sections;
     this.viewport = viewport;
     this.scroll = scroll;
 
     this.elements = {
       scrollContent: this.element.querySelector('.scroll__content')
     }
+
+    this.posSections = [];
   }
 
   setSizes() {
@@ -16,6 +19,20 @@ export default class {
     this.scroll.limit = this.elements.scrollContent.clientHeight - this.viewport.height;
 
     document.body.style.height = `${this.scroll.height}px`;
+  }
+
+  setSection() {
+    this.posSections = [];
+    this.sections.forEach((section) => {
+      this.posSections.push(section.offsetTop);
+    });
+  }
+
+  scrollSection(section) {
+    window.scrollTo({
+      top: this.posSections[section],
+      behavior: 'smooth'
+    });
   }
 
   update() {
@@ -37,5 +54,6 @@ export default class {
     }
 
     this.setSizes();
+    this.setSection();
   }
 }
