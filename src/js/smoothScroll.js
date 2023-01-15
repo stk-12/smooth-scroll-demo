@@ -35,6 +35,13 @@ export default class {
     });
   }
 
+  scrollPagetop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
   update() {
     this.scroll.hard = window.scrollY;
     this.scroll.hard = gsap.utils.clamp(0, this.scroll.limit, this.scroll.hard);

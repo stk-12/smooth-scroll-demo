@@ -50,6 +50,11 @@ class Main {
         this.smoothScroll.scrollSection(num);
       });
     });
+
+    document.querySelector('.pagetop').addEventListener('click', (e)=>{
+      e.preventDefault();
+      this.smoothScroll.scrollPagetop();
+    })
   }
   
   // onScroll() {
